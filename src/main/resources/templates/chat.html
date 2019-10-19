@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot WebSocket</title>
+    <script type="text/javascript" th:src="@{/static/js/main.js}" />
+    <script type="text/javascript" th:src="@{/js/main.js}" />
+    <!--<script th:src="@{/js/main.js}"></script>-->
+
+</head>
+<body>
+<div id="chat-container">
+    <div class="chat-header">
+        <div class="user-container">
+            <!--<span id="username" th:utext="${username}"></span>-->
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+        <h3>Spring WebSocket Chat Demo</h3>
+    </div>
+
+    <hr/>
+
+    <div id="connecting">Connecting...</div>
+    <ul id="messageArea">
+    </ul>
+    <form id="messageForm" name="messageForm">
+        <div class="input-message">
+            <input type="text" id="message" autocomplete="off"
+                   placeholder="Type a message..."/>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</div>
+
+<script th:src="@{/static/js/main.js}"></script>
+
+</body>
+</html>

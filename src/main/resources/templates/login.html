@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login Page: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Create a Login:</h1>
+    <form th:action="@{/}" th:object="${user}" method="POST">
+        Login:
+        <input type="text" th:field="*{login}"/>
+        <br/>
+        <input type="submit" value="Create" />
+    </form>
+    <br/>
+
+    <div th:if="${error}" >
+        <h3>Login is empty or not unique</h3>
+        <h3>Try again</h3>
+    </div>
+</body>
+</html>
