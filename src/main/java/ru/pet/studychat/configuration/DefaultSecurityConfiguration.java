@@ -28,6 +28,9 @@ public class DefaultSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/**").anonymous()
+                .and()
+                .logout()
+                .logoutUrl("logout")
         ;
     }
 

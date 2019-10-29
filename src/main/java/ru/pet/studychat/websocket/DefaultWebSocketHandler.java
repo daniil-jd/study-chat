@@ -8,13 +8,18 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
+import ru.pet.studychat.dto.MessageDto;
+import ru.pet.studychat.service.DefaultMessageService;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @RequiredArgsConstructor
 public class DefaultWebSocketHandler implements WebSocketHandler {
     private ConcurrentHashMap<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
+    private final DefaultMessageService messageService;
     private final ObjectMapper mapper;
 
     @Override
@@ -25,8 +30,14 @@ public class DefaultWebSocketHandler implements WebSocketHandler {
     @Override
     public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) throws Exception {
         if (webSocketMessage instanceof TextMessage) {
-//            var messageFromSocket = mapper.readValue(((TextMessage) webSocketMessage).getPayload(), MessageDto.class);
-            System.out.println("ws");
+            MessageDto messageFromSocket = mapper.readValue(((TextMessage) webSocketMessage).getPayload(), MessageDto.class);
+
+            messageService.save(messageFromSocket);
+
+            List<MessageDto> messages = messageService.getAllMessages();
+            for (Map.Entry<String, WebSocketSession> sessionEntry : sessions.entrySet()) {
+                sessionEntry.getValue().sendMessage(new TextMessage(mapper.writeValueAsString(messages)));
+            }
         }
     }
 

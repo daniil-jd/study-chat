@@ -5,28 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.pet.studychat.dto.UserRequestDto;
 import ru.pet.studychat.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 @Controller
-@RequestMapping("/chat")
+@RequestMapping("/logout")
 @RequiredArgsConstructor
-public class ChatController {
+public class LogoutController {
     private final UserService userService;
 
     @GetMapping
-    public String doChat(HttpServletRequest request, Model model) {
+    public String getLoginPage(HttpServletRequest request) {
         String login = (String) request.getSession().getAttribute("login");
-        Optional<UserRequestDto> userOptional = userService.getUserByLogin(login);
-        if (userOptional.isPresent()) {
-            model.addAttribute("user", userOptional.get());
-        } else {
-            return "redirect:/";
-        }
-
-        return "chat1";
+        userService.removeUserByLogin(login);
+        return "redirect:/";
     }
 }

@@ -5,19 +5,24 @@ import ru.pet.studychat.dto.UserRequestDto;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Repository
 public class UserRepository {
     /**
      * Thread safe set.
      */
-    private Set<UserRequestDto> users = ConcurrentHashMap.newKeySet();
+    private CopyOnWriteArrayList<UserRequestDto> users = new CopyOnWriteArrayList<>();
 
-    public Set<UserRequestDto> getUsers() {
+    public CopyOnWriteArrayList<UserRequestDto> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<UserRequestDto> users) {
+    public void setUsers(CopyOnWriteArrayList<UserRequestDto> users) {
         this.users = users;
+    }
+
+    public void removeUser(UserRequestDto user) {
+        users.remove(user);
     }
 }

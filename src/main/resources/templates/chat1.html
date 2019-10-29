@@ -2,24 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Boot WebSocket</title>
-    <script type="text/javascript" th:src="@{/static/js/main.js}" />
-    <script type="text/javascript" th:src="@{/js/main.js}" />
-    <!--<script th:src="@{/js/main.js}"></script>-->
-
+    <!--<script type="text/javascript" th:src="@{/js/moment.min.js}" />-->
+    <!--<script src="/js/moment.min.js"></script>-->
 </head>
 <body>
 <div id="chat-container">
     <div class="chat-header">
         <div class="user-container">
-            <!--<span id="username" th:utext="${username}"></span>-->
-            <a th:href="@{/logout}">Logout</a>
+            <span id="username" th:text="${user.login}"></span>
+            <button id="logout" >logout</button>
+            <!--<a th:href="@{/logout}">Logout</a>-->
         </div>
         <h3>Spring WebSocket Chat Demo</h3>
     </div>
-
     <hr/>
-
-    <div id="connecting">Connecting...</div>
     <ul id="messageArea">
     </ul>
     <form id="messageForm" name="messageForm">
@@ -31,7 +27,8 @@
     </form>
 </div>
 
-<script th:src="@{/static/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 
 </body>
 </html>

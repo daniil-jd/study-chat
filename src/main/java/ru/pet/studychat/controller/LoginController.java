@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.pet.studychat.dto.UserRequestDto;
 import ru.pet.studychat.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
@@ -23,14 +25,14 @@ public class LoginController {
     }
 
     @PostMapping
-    public String saveLogin(@ModelAttribute UserRequestDto userRequestDto, Model model) {
+    public String saveLogin(@ModelAttribute UserRequestDto userRequestDto, Model model, HttpServletRequest request) {
         boolean result = service.add(userRequestDto);
         if (!result) {
             model.addAttribute("error", true);
             model.addAttribute("user", new UserRequestDto());
             return "login";
         }
-
+        request.getSession().setAttribute("login", userRequestDto.getLogin());
         return "redirect:/chat";
     }
 
