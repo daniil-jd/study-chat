@@ -3,20 +3,35 @@
 <head>
     <title>Login Page: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{http://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css}" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link th:href="@{http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+    <link href="../static/css/login_style.css" th:href="@{/css/login_style.css}" rel="stylesheet" />
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
 </head>
 <body>
-    <h1>Create a Login:</h1>
-    <form th:action="@{/}" th:object="${user}" method="POST">
-        Login:
-        <input type="text" th:field="*{login}"/>
-        <br/>
-        <input type="submit" value="Create" />
-    </form>
-    <br/>
 
-    <div th:if="${error}" >
-        <h3>Login is empty or not unique</h3>
-        <h3>Try again</h3>
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-1">
+            <h3>Chat Login Form</h3>
+            <form th:action="@{/}" th:object="${user}" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" th:field="*{login}" placeholder="Your Login" value="" />
+            </div>
+            <!--<div class="form-group">-->
+                <!--<input type="password" class="form-control" placeholder="Your Password *" value="" />-->
+            <!--</div>-->
+            <div class="form-group">
+                <input type="submit" class="btnSubmit" value="Login" />
+            </div>
+            <!--<div class="form-group">-->
+                <!--<a href="#" class="btnForgetPwd">Forget Password?</a>-->
+            <!--</div>-->
+            </form>
+        </div>
     </div>
+</div>
+
 </body>
 </html>

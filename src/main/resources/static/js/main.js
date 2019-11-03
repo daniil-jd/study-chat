@@ -9,6 +9,28 @@ var wsConnection = null;
 var username = null;
 var baseURL = 'http://localhost:8080';
 
+const styles = {
+    container: {
+        height: '75vh',
+        overflowY: 'scroll',
+        // flex: 1,
+    },
+    ul: {
+        listStyle: 'none',
+    },
+    li: {
+        marginTop: 13,
+        marginBottom: 13,
+    },
+    senderUsername: {
+        fontWeight: 'bold',
+    },
+    senderTime: {
+        fontWeight: 'lighter',
+        color: '#8f94a1',
+    },
+    message: { fontSize: 15 },
+};
 
 function connect() {
     console.log('conn is success');
@@ -41,8 +63,13 @@ function onNewMessage (evt) {
 
     messages.forEach(function (message) {
         var messageElement = document.createElement('li');
+        messageElement.setAttribute('style', 'fontWeight: \'bold\'');
+        console.log('style');
+        console.log(messageElement);
         var senderDiv = document.createElement('div');
         var senderSpan = document.createElement('span');
+        senderSpan.setAttribute('style', 'fontWeight: \'bold\'');
+        // senderSpan.style = styles.senderUsername;
         var senderText = document.createTextNode(message.sender);
 
         senderSpan.appendChild(senderText);
@@ -50,6 +77,7 @@ function onNewMessage (evt) {
 
         var timeDiv = document.createElement('div');
         var timeSpan = document.createElement('span');
+        timeSpan.style = styles.senderTime;
         var timeText = document.createTextNode(moment(new Date(message.created)).calendar());
 
         timeSpan.appendChild(timeText);
@@ -57,6 +85,7 @@ function onNewMessage (evt) {
 
         var msgDiv = document.createElement('div');
         var msgSpan = document.createElement('span');
+        msgSpan.style = styles.message;
         var msgText = document.createTextNode(message.message);
 
         msgSpan.appendChild(msgText);

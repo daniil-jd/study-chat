@@ -1,0 +1,21 @@
+.container{
+    height: '75vh';
+    overflowY: 'scroll';
+}
+ul{
+    listStyle: 'none'
+}
+li{
+    marginTop: 13;
+    marginBottom: 13;
+}
+senderUsername{
+    fontWeight: 'bold';
+}
+senderTime{
+    fontWeight: 'lighter';
+    color: '#8f94a1';
+}
+message{
+    fontSize: 15;
+}
